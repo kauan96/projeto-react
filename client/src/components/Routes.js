@@ -3,6 +3,8 @@ import React from 'react'
 import { Router, Switch, Route, Redirect } from 'react-router'
 
 import Login from './login/Login'
+import Register from './register/Register'
+import List from './list/List'
 // import Register from '../pages/register'
 // import Home from '../pages/home'
 // import NotFound from './NotFound'
@@ -14,8 +16,9 @@ const Routes = () => (
     <Router history={history}>
         <Switch>
             <Route component={Login} exact path="/login"/>
-            {/* <Route component={Register} exact path="/register"/>
-            <PrivateRoute component={Home} exact path="/"/>*/}
+            <Route component={List} exact path="/list"/>
+            <Route component={Register} exact path="/register"/>
+            {/*<PrivateRoute component={Home} exact path="/"/>*/}
             {/* <PrivateRoute component={NotFound}/>  */}
             <Redirect from="*" to="/login" />
         </Switch>

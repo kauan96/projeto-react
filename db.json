@@ -2,6 +2,13 @@
     "users": [{
         "id": 1,
         "name": "Kauan Moreira",
-        "email": "kauanmoreirapessoal@gmail.com"
+        "email": "kauanmoreirapessoal@gmail.com",
+        "senha": "123456"
+    }],
+    "dragons": [{
+        "id": 1,
+        "name": "Dragon",
+        "dateOfCreation": "25/05/2020",
+        "type": "Fogo"
     }]
 }

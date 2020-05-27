@@ -1,9 +1,11 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom'
 import './App.scss';
-import Routes from '../components/Routes'
+import Routes from './Routes'
 
-export default () => (
-  <div className="App">
-      <Routes />
-  </div>
-);
+export default props =>
+    <BrowserRouter>
+        <div className="App">
+            <Routes />
+        </div>
+    </BrowserRouter>  

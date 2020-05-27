@@ -2,9 +2,10 @@ import React from 'react'
 
 import { Router, Switch, Route, Redirect } from 'react-router'
 
-import Login from './login/Login'
-import Register from './register/Register'
-import List from './list/List'
+import Login from '../components/login/Login'
+import Register from '../components/register/Register'
+import List from '../components/list/List'
+import Edit from '../components/list/edit/Edit'
 // import Register from '../pages/register'
 // import Home from '../pages/home'
 // import NotFound from './NotFound'
@@ -16,8 +17,11 @@ const Routes = () => (
     <Router history={history}>
         <Switch>
             <Route component={Login} exact path="/login"/>
-            <Route component={List} exact path="/list"/>
-            <Route component={Register} exact path="/register"/>
+            <Route component={List} exact path="/listar"/>
+            <Route path="/listar/editar/:id" children={<Edit />} />
+            {/* <Route component={Edit} exact path="/list/edit"/> */}
+            <Route component={Register} exact path="/cadastrar"/>
+            
             {/*<PrivateRoute component={Home} exact path="/"/>*/}
             {/* <PrivateRoute component={NotFound}/>  */}
             <Redirect from="*" to="/login" />

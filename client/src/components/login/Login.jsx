@@ -1,17 +1,13 @@
 import React, {useState} from 'react';
 import axios from 'axios'
 import { history } from '../../history'
-import './Register.scss';
+import './Login.scss';
 
 export default props => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const baseUrl = 'http://localhost:3001/users'
-    const initialState = {
-        user: { name: '', email: '' }
-    }
-
+    const BASE_URL = 'http://localhost:3001/users'
 
     function changeEmail(e) {
         setEmail(e.target.value);
@@ -21,36 +17,18 @@ export default props => {
         setPassword(e.target.value);
     }
 
-    function save() {
-        const user = this.state.user
-        const method = user.id ? 'put' : 'post'
-        const url = user.id ? `${baseUrl}/${user.id}` : baseUrl
-        axios[method](url, user)
-            .then(resp => {
-                const list = this.getUpdatedList(resp.data)
-                this.setState({ user: initialState.user, list })
-            })
-    }
-
     function connect(event) {
-        axios.post(`${baseUrl}`).then((response) => {
-            console.log("response");
-            
-            if(response) {
-                localStorage.setItem('app-token', response.id);
-                history.push('/list')
-            }
+        axios.get(`${BASE_URL}/1`).then((response) => {
+            localStorage.setItem('app-token', response.id);
+            history.push('/listar')
         })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        });
+        .catch((err) => console.log(err));
         event.preventDefault();
     }
 
     
     return (
-        <div className="Register">
+        <div className="Login">
             <form onSubmit={connect}>
                 <div className="box-input">
                     <label htmlFor="email">Usuário</label>

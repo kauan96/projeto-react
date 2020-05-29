@@ -71,18 +71,20 @@ export default class List extends Component {
             <div className="List">
                 <Menu />
                 <div className="content">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Data de criação</th>
-                                <th>Nome</th>
-                                <th>Tipo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.renderRows()}
-                        </tbody>
-                    </table>
+                    <div className="table-box">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data de criação</th>
+                                    <th>Nome</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.renderRows()}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         )

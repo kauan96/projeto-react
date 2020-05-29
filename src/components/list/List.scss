@@ -50,7 +50,13 @@
     @media (max-width: $breakpoint-tablet) {
         .content {
             position: relative;
-            overflow: auto;
+            overflow: hidden;
+            display: block;
+            padding: 10px 10px;
+
+            .table-box {
+                overflow: auto;
+            }
         }
     }
 }

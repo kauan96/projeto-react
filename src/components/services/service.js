@@ -2,9 +2,6 @@ import axios from 'axios'
 
 export default class Service {
     baseURL() {
-        return "http://localhost:8080/api"
-    }
-    baseBagaceiraURL() {
         return "http://localhost:3001/users"
     }
     apiDragonURL() {
@@ -12,8 +9,7 @@ export default class Service {
     }
 
     registraUsuario(request) {
-        console.log(request);
-        return axios.post(`${this.baseBagaceiraURL()}`, 
+        return axios.post(`${this.baseURL()}`, 
             { 
                 name: request.name,
                 email: request.email,
@@ -21,9 +17,8 @@ export default class Service {
             });
     }
 
-    login({ login, senha }) {
-        return axios.post(`${this.baseURL()}/usuario/login`,
-            { login, senha });
+    login(email,senha) {
+        return axios.get(`${this.baseURL()}?email=` + email + '&password=' + senha);
     }
 
     getListDragon() {
@@ -39,7 +34,8 @@ export default class Service {
     }
 
     editDragon(request) {
-        return axios.put(`${this.apiDragonURL()}/` + this.state.id,
+        console.log(request);
+        return axios.put(`${this.apiDragonURL()}/` + request.id,
             {
                 name: request.name,
                 type: request.type
@@ -48,9 +44,5 @@ export default class Service {
 
     deleteDragon(id) {
         return axios.delete(`${this.apiDragonURL()}/` + id);
-    }
-
-    getLoginBagaceiro(email,senha) {
-        return axios.get(`${this.baseBagaceiraURL()}?email=` + email + '&password=' + senha);
-    }
+    }    
 }

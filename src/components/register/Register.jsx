@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import { history } from '../../history'
-import Menu from '../menu/Menu';
 import './Register.scss';
 import Service from '../services/service'
 

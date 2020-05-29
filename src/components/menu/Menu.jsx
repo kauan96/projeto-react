@@ -4,12 +4,12 @@ import './Menu.scss';
 
 export default props => (
     <div className="Menu">
-        <nav className='topnav' id='myTopnav'>
+        <nav className='topnav'>
             <ul className="nav navbar-nav">
-                <NavLink exact={true} activeClassName='active' to={"listar"}>
+                <NavLink exact={true} activeClassName='active' to={"/listar"}>
                     <li>Listagem</li>
                 </NavLink>
-                <NavLink exact={true} activeClassName='active' to={"cadastro-dragao"}>
+                <NavLink exact={true} activeClassName='active' to={"/cadastro-dragao"}>
                     <li>Cadastrar dragao</li>
                 </NavLink>
             </ul>

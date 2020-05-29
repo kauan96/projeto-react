@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import Menu from '../menu/Menu';
-import './RegisterDragon.scss';
-import Service from '../services/service'
+import './Detail.scss';
+import Service from '../services/service';
 
-export default class RegisterDragon extends Component {
+
+export default class Detail extends Component {
 
     constructor(props) {
         super(props);
+        var options = { day: 'numeric', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
         this.state = {
-            name: '',
-            type: '',
+            id: this.props.location.state.detail.id,
+            name: this.props.location.state.detail.name,
+            type: this.props.location.state.detail.type,
+            createdAt: new Date(this.props.location.state.detail.createdAt).toLocaleDateString('pt-br', options),
             sucess: '',
             error: ''
         }
@@ -25,26 +29,19 @@ export default class RegisterDragon extends Component {
     changeType(event) {
         this.setState({ type: event.target.value })
     }
-
-    clear() {
-        this.setState({ name: '', type: '', sucess: '', error: '' })
-    }
-
     save = async e => {
         e.preventDefault();
         try {
-            this.clear();
-            const { name, type } = this.state;
+            const { id, name, type } = this.state;
             if (!name || !type) {
                 this.setState({ error: "Todos campos são obrigatórios." });
             } else {
-                await this.service.registerDragon({ name, type });
-                this.clear();
-                this.setState({sucess: "Dragão cadastrado, com sucesso!"});
+                await this.service.editDragon({ id, name, type });
+                this.setState({sucess: "Dragão editado, com sucesso!"});
             }
         } catch {
             this.setState({
-                error: "Houve um problema com o cadastro, por favor tente mais tarde."
+                error: "Houve um problema com a edição, por favor tente mais tarde."
             });
         }            
     }
@@ -53,9 +50,9 @@ export default class RegisterDragon extends Component {
         return (
             <div>
                 <Menu />
-                <div className="RegisterDragon">
+                <div className="Detail">
                     <form onSubmit={this.save}>
-                        <h2>Cadastro de Dragão</h2>
+                        <h2>Edição do Dragão</h2>
                         { this.state.error && <p className="message-error">{ this.state.error }</p> }
                         { this.state.sucess && <p className="message-sucess">{ this.state.sucess }</p> }
                         <div className="box-input">
@@ -70,7 +67,14 @@ export default class RegisterDragon extends Component {
                                 value={this.state.type}
                                 onChange={ this.changeType } />
                         </div>
-                        <input type="submit" value="CADASTRAR" />
+
+                        <div className="box-input">
+                            <label htmlFor="createdAt">Data do cadastro: </label>
+                            <input id="createdAt" type="text"
+                                value={this.state.createdAt}
+                                readOnly />
+                        </div>
+                        <input type="submit" value="EDITAR" />
                     </form>
                 </div>
             </div>

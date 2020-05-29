@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Menu from '../menu/Menu';
-import { history } from '../../history'
 import { Link } from 'react-router-dom'
 import './List.scss';
 import Service from '../services/service'
@@ -27,13 +26,14 @@ export default class List extends Component {
     }
 
     detail(e) {
-        this.props.history.push('/listar/detalhe/' + 23)
+        this.props.history.push({
+            pathname: 'detalhe/' + e.id,
+            state: { detail: e }
+        });
     }
 
-    // this.state.id
-
     remove(user) {
-        this.setState({ list: this.state.list.filter(item => item.id != user.id) });
+        this.setState({ list: this.state.list.filter(item => item.id !== user.id) });
         this.service.deleteDragon(user.id)
             .then(resp => this.getUpdatedList(resp.data))
             .catch((error) => console.log(error));
@@ -51,12 +51,10 @@ export default class List extends Component {
                 <td>{item.name}</td>
                 <td>{item.type}</td>
                 <td>
-                    <Link to={"detalhe/" + item.id}>
-                        <button className="btn btn-warning"
-                            onClick={() => this.detail(item)}>
-                            Detalhe
-                        </button>
-                    </Link>
+                    <button className="btn-detail"
+                        onClick={() => this.detail(item)}>
+                        Detalhe
+                    </button>
                 </td>
                 <td>
                     <button className="btn-exclusion"
@@ -68,7 +66,6 @@ export default class List extends Component {
         ))
 
     }
-
 
     render() {
         return (

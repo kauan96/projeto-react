@@ -21,6 +21,30 @@
                 }
             }
         }
+
+        .btn-detail {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+        }
+
+        .btn-exclusion {
+            color: #fff;
+            background-color: #dc2335;
+            border-color: #dc2335;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+        }
     }
     $breakpoint-tablet: 768px;
     @media (max-width: $breakpoint-tablet) {

@@ -34,7 +34,7 @@ class Login extends Component {
             this.setState({ error: "Preencha username e senha para continuar!" });
         } else {
             try {
-                const response = await this.service.getLoginBagaceiro(email, password);
+                const response = await this.service.login(email, password);
                 if(response.data.length > 0) {
                     sessionStorage.setItem('app-token', response.data[0].id);
                     this.props.history.push('/listar')

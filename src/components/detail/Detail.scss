@@ -1,0 +1,43 @@
+.Detail {
+    background-color: #282c34;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    h2 {
+        width: 100%;
+        display: block;
+        color: #fff;
+    }
+
+    form {
+        width: 30%;
+        align-self: center;
+        background-color: rgba(0, 0, 0, 0.75);
+        padding: 50px;
+
+        .box-input {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        label {
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        input[readOnly] {
+            background-color: #495057;
+            border-color: #495057;
+            color: #fff;
+        }
+
+        input[type=submit] {
+            margin-top: 30px;
+        }
+    }
+}

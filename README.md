@@ -12,6 +12,9 @@ http://localhost:3000/login
 ### `npm run dev`
 Para rodar o ambiente completo
 
+### Login
+Para testes, existe um usuario padrão, email: admin@pocreact.com senha: 123456
+
 ### `npm run build`
 
 Ele agrupa corretamente o React no modo de produção e otimiza a construção para obter o melhor desempenho.

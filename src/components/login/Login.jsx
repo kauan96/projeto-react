@@ -65,7 +65,7 @@ class Login extends Component {
                     onChange={ this.changeEmail }
                     placeholder="Email" />
                 </div>
-               <div className="box-input">
+            <div className="box-input">
                     <label htmlFor="password">Senha: </label>
                     <input id="password" type="password"
                     value={this.state.password}
@@ -74,12 +74,11 @@ class Login extends Component {
                 </div>
                 <input type="submit" value="ENVIAR" />
             </form>
-            
-            <Link to={"cadastro/"}>
-                <div className="register-box">
+            <div className="register-box">
+                <Link to={"cadastro/"}>
                     <button>CADASTRAR-SE</button>
-                </div>
-            </Link>
+                </Link>
+            </div>
         </div>
         )
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './Register.scss';
 import Service from '../services/service'
 
@@ -81,6 +82,12 @@ export default class Register extends Component {
                     </div>
                     <input type="submit" value="CADASTRAR" />
                 </form>
+
+                <div className="login-box">
+                    <Link to={"login/"}>
+                        <button>IR PARA LOGIN</button>
+                    </Link>
+                </div>
             </div>
         )
     }

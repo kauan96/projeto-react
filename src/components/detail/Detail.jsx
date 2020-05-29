@@ -8,7 +8,7 @@ export default class Detail extends Component {
 
     constructor(props) {
         super(props);
-        var options = { day: 'numeric', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const options = { day: 'numeric', year: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', second: 'numeric' };
         this.state = {
             id: this.props.location.state.detail.id,
             name: this.props.location.state.detail.name,

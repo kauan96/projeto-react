@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Menu from '../menu/Menu';
-import { Link } from 'react-router-dom'
 import './List.scss';
 import Service from '../services/service'
 

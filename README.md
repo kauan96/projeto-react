@@ -20,3 +20,5 @@ A compilação é minificada e os nomes de arquivos incluem os hashes. <br>
 Seu aplicativo está pronto para ser implantado!
 
 Consulte a seção sobre [implantação] (https://facebook.github.io/create-react-app/docs/deployment) para obter mais informações.
+
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg)](https://circleci.com/gh/kauan96/projeto-react/tree/master)

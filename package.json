@@ -1,6 +1,7 @@
 {
   "name": "node-react",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "client": "npm start",
     "server": "json-server --watch db.json --port 3001",

@@ -6,16 +6,24 @@
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
     form {
         width: 30%;
         align-self: center;
         background-color: rgba(0, 0, 0, 0.75);
         padding: 30px 50px 50px;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 31px;
 
         img {
             width: 100%;
             max-width: 200px;
             margin-bottom: 15px;
+        }
+
+        p {
+            color: #FF5722;
+            font-weight: bold;
         }
 
         .box-input {
@@ -27,25 +35,19 @@
         label {
             color: white;
         }
+    }
 
-        input {
-            display: block;
-            width: 100%;
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        }
-
+    .register-box {
+        margin: 30px 0px 0px;
         button {
-            
+            background: #61dafb;
+            color: #000;
+            border: 0;
+            padding: 30px 0px;
+            box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 31px;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1rem;
         }
     }
 }

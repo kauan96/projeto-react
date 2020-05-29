@@ -3,62 +3,87 @@ import axios from 'axios'
 import { history } from '../../history'
 import Menu from '../menu/Menu';
 import './Register.scss';
-
-const BASE_URL = 'http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon'
-const initialState = { name: '', type: '' }
+import Service from '../services/service'
 
 export default class Register extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { ...initialState }
-
-        this.handleInputChange = this.handleInputChange.bind(this)
+        this.state = {
+            name: '',
+            email: '',
+            password: '',
+            sucess: '',
+            error: ''
+        }
+        this.service = new Service();
+        this.changeName = this.changeName.bind(this);
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
     }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const name = target.name;
+    changeName(event) {
+        this.setState({ name: event.target.value })
+    }
 
-        this.setState({
-            [name]: target.value
-        });
+    changeEmail(event) {
+        this.setState({ email: event.target.value })
+    }
+
+    changePassword(event) {
+        this.setState({ password: event.target.value })
     }
 
     clear() {
-        this.setState({ name: '', type: '' })
+        this.setState({ name: '', email: '', password: '', sucess: '', error: '' })
     }
 
-
-    
-    save = e => {
-        axios["post"](BASE_URL, {
-                name: this.state.name,
-                type: this.state.type
-            })
-            .then(_ => this.clear() )
-            .catch((err) => console.log(err));
-            e.preventDefault();
+    save = async e => {
+        e.preventDefault();
+        try {
+            this.clear();
+            const { name, email, password } = this.state;
+            if (!name || !email || !password) {
+                this.setState({ error: "Todos campos são obrigatórios." });
+            } else {
+                await this.service.registraUsuario({ name, email, password });
+                this.clear();
+                this.setState({sucess: "Usuário cadastrado, com sucesso!"});
+            }
+        } catch {
+            this.setState({
+                error: "Houve um problema com o cadastro, por favor tente mais tarde."
+            });
+        }            
     }
-
 
     render() {
         return (
-            <div>
-                <Menu />
-                <div className="Register">
-                    <form onSubmit={this.save}>
-                        <div className="box-input">
-                            <label htmlFor="name">Usuário</label>
-                            <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} placeholder="Nome" required />
-                        </div>
-                        <div className="box-input">
-                            <label htmlFor="type">Tipo</label>
-                            <input name='type' type="text" value={this.state.type} onChange={this.handleInputChange} placeholder="Tipo" required/>
-                        </div>
-                        <input type="submit" value="Cadastrar" />
-                    </form>
-                </div>
+            <div className="Register">
+                <form onSubmit={this.save}>
+                    <h2>Cadastro de Usuário</h2>
+                    { this.state.error && <p className="message-error">{ this.state.error }</p> }
+                    { this.state.sucess && <p className="message-sucess">{ this.state.sucess }</p> }
+                    <div className="box-input">
+                        <label htmlFor="name">Nome: </label>
+                        <input id="name" type="text"
+                            value={this.state.name}
+                            onChange={ this.changeName } />
+                    </div>
+                    <div className="box-input">
+                        <label htmlFor="email">Email: </label>
+                        <input id="email" type="email"
+                            value={this.state.email}
+                            onChange={ this.changeEmail } />
+                    </div>
+                    <div className="box-input">
+                        <label htmlFor="password">Senha: </label>
+                        <input id="password" type="password"
+                            value={this.state.password}
+                            onChange={ this.changePassword } />
+                    </div>
+                    <input type="submit" value="CADASTRAR" />
+                </form>
             </div>
         )
     }

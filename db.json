@@ -1,14 +1,42 @@
 {
-    "users": [{
-        "id": 1,
-        "name": "Kauan Moreira",
-        "email": "kauanmoreirapessoal@gmail.com",
-        "senha": "123456"
-    }],
-    "dragons": [{
-        "id": 1,
-        "name": "Dragon",
-        "dateOfCreation": "25/05/2020",
-        "type": "Fogo"
-    }]
+  "users": [
+    {
+      "id": 1,
+      "name": "Kauan Moreira",
+      "email": "kauanmoreirapessoal@gmail.com",
+      "password": "123456"
+    },
+    {
+      "name": "Kauan Moreira MIngola",
+      "email": "kauanmoreira96@hotmail.com",
+      "password": "123456",
+      "id": 2
+    },
+    {
+      "name": "test",
+      "email": "teste@gmail.com",
+      "password": "teste",
+      "id": 3
+    },
+    {
+      "name": "teste 222",
+      "email": "teste123@gmail.com",
+      "password": "teste1",
+      "id": 4
+    },
+    {
+      "name": "Kauan Moreira MIngola",
+      "email": "kauanmoreira96@hotmail.com",
+      "password": "teste123",
+      "id": 5
+    }
+  ],
+  "dragons": [
+    {
+      "id": 1,
+      "name": "Dragon",
+      "dateOfCreation": "25/05/2020",
+      "type": "Fogo"
+    }
+  ]
 }

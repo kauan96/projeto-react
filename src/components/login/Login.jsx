@@ -1,48 +1,88 @@
-import React, {useState} from 'react';
-import axios from 'axios'
-import { history } from '../../history'
+import React, { Component } from 'react'
+import { withRouter } from "react-router-dom"
+import { Link } from 'react-router-dom'
 import logo from '../../logo.svg';
 import './Login.scss';
+import Service from '../services/service';
 
-export default props => {
+class Login extends Component {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const BASE_URL = 'http://localhost:3001/users'
-
-    function changeEmail(e) {
-        setEmail(e.target.value);
+    constructor(props) {
+        super(props)
+        this.service = new Service()
+        this.state = {
+            email: '',
+            password: '',
+            error: ''
+        }
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
     }
 
-    function  changePassword(e) {
-        setPassword(e.target.value);
+    changeEmail(event) {
+        this.setState({ email: event.target.value })
     }
 
-    function connect(event) {
-        axios.get(`${BASE_URL}/1`).then((response) => {
-            localStorage.setItem('app-token', response.id);
-            history.push('/listar')
-        })
-        .catch((err) => console.log(err));
-        event.preventDefault();
+    changePassword(event) {
+        this.setState({ password: event.target.value })
     }
 
-    
-    return (
+    connect = async e => {
+        e.preventDefault();
+        const { email, password } = this.state;
+        if (!email || !password) {
+            this.setState({ error: "Preencha username e senha para continuar!" });
+        } else {
+            try {
+                const response = await this.service.getLoginBagaceiro(email, password);
+                if(response.data.length > 0) {
+                    sessionStorage.setItem('app-token', response.data[0].id);
+                    this.props.history.push('/listar')
+                }
+                else {
+                    this.setState({
+                        error: "Houve um problema com o login, verifique suas credenciais!"
+                    });
+                }
+            } catch (err) {
+                this.setState({
+                    error: "Houve um problema com o login, verifique suas credenciais!"
+                });
+            }
+        }
+    }
+
+    render() {
+        return (
         <div className="Login">
-            
-            <form onSubmit={connect}>
-            <div><img src={logo} className="App-logo" alt="logo" /></div>
+            <form onSubmit={e => this.connect(e)}>
+                <div><img src={logo} className="App-logo" alt="logo" /></div>
+                { this.state.error && <p className="message-error">{ this.state.error }</p> }
                 <div className="box-input">
-                    <label htmlFor="email">Usuário</label>
-                    <input id="email" type="email" value={email} onChange={changeEmail} placeholder="Email" />
+                    <label htmlFor="email">Usuário: </label>
+                    <input id="email" type="email"
+                    value={this.state.email}
+                    onChange={ this.changeEmail }
+                    placeholder="Email" />
                 </div>
                <div className="box-input">
-                    <label htmlFor="password">Senha</label>
-                    <input type="password" value={password} onChange={changePassword} placeholder="Password" />
+                    <label htmlFor="password">Senha: </label>
+                    <input id="password" type="password"
+                    value={this.state.password}
+                    onChange={ this.changePassword }
+                    placeholder="Password" />
                 </div>
-                <input type="submit" value="Enviar" />
+                <input type="submit" value="ENVIAR" />
             </form>
+            
+            <Link to={"cadastro/"}>
+                <div className="register-box">
+                    <button>CADASTRAR-SE</button>
+                </div>
+            </Link>
         </div>
-    )
+        )
+    }
 }
+
+export default withRouter(Login);

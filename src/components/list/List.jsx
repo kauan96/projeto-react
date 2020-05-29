@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Menu from '../menu/Menu';
-import Edit from './edit/Edit'
 import { history } from '../../history'
 import { Link } from 'react-router-dom'
 import './List.scss';
+import Service from '../services/service'
 
-const BASE_URL = 'http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon'
 export default class List extends Component {
-    
+
     constructor(props) {
-      super(props);
-      this.state = { list: [] }
+        super(props);
+        this.service = new Service()
+        this.state = {
+            list: []
+        }
     }
 
     componentDidMount() {
@@ -19,30 +20,28 @@ export default class List extends Component {
     }
 
     getList() {
-        axios.get(`${BASE_URL}`)
-            .then((resp) => {
-                this.setState({ list: resp.data })
+        this.service.getListDragon().then((resp) => {
+            this.setState({ list: resp.data })
         })
-        .catch((error) => console.log(error));
+            .catch((error) => console.log(error));
     }
 
-    edit() {
-        history.push('/listar/editar')
+    detail(e) {
+        this.props.history.push('/listar/detalhe/' + 23)
     }
+
+    // this.state.id
 
     remove(user) {
-        this.setState({ list: this.state.list.filter(item => item.id != user.id)});
-        axios.delete(`${BASE_URL}/${user.id}`).then(resp => {
-            const list = this.getUpdatedList(resp.data)
-                
-        }).catch(function (error) {
-            console.log(error);
-        });
+        this.setState({ list: this.state.list.filter(item => item.id != user.id) });
+        this.service.deleteDragon(user.id)
+            .then(resp => this.getUpdatedList(resp.data))
+            .catch((error) => console.log(error));
     }
 
     getUpdatedList(item) {
         const list = this.state.list.filter(u => u.id !== item.id)
-        return list
+        return list;
     }
 
     renderRows() {
@@ -52,10 +51,10 @@ export default class List extends Component {
                 <td>{item.name}</td>
                 <td>{item.type}</td>
                 <td>
-                    <Link to={"editar/" + item.id}>
+                    <Link to={"detalhe/" + item.id}>
                         <button className="btn btn-warning"
-                            onClick={() => this.edit(item)}>
-                                Editar
+                            onClick={() => this.detail(item)}>
+                            Detalhe
                         </button>
                     </Link>
                 </td>
@@ -65,14 +64,14 @@ export default class List extends Component {
                         Excluir
                     </button>
                 </td>
-            </tr>   
+            </tr>
         ))
-        
-    }
-    
 
-     render() {
-         return (
+    }
+
+
+    render() {
+        return (
             <div className="List">
                 <Menu />
                 <div className="content">

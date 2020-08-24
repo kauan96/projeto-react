@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Menu from '../menu/Menu';
+import Search from '../search/Search';
 import './List.scss';
 import Service from '../services/service'
 
@@ -70,6 +71,7 @@ export default class List extends Component {
         return (
             <div className="List">
                 <Menu />
+                <Search />
                 <div className="content">
                     <div className="table-box">
                         <table>

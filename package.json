@@ -28,7 +28,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "concurrently": "^3.5.0",
     "jasmine": "^3.5.0",
     "react-redux": "^7.2.1",
